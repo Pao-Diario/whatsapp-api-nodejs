@@ -2,10 +2,18 @@ const express = require('express')
 const path = require('path')
 const exceptionHandler = require('express-exception-handler')
 exceptionHandler.handle()
+const cors = require('cors')
 const app = express()
 const error = require('../api/middlewares/error')
 const tokenCheck = require('../api/middlewares/tokenCheck')
 const { protectRoutes } = require('./config')
+
+app.use(
+    cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'DELETE'],
+    })
+)
 
 app.use(express.json())
 app.use(express.json({ limit: '50mb' }))
