@@ -10,10 +10,11 @@ permissions:
 jobs:
     ec2-deploy:
         runs-on: ubuntu-latest
-        steps:
-            - name: Checkout the files
-              uses: actions/checkout@v3
+        environment:
+            name: ${{ github.ref_name }}
+            url: ${{ steps.deploy.outputs.vm_url }}
 
+        steps:
             - id: deploy
               name: Deploy to ec2
               uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
@@ -22,5 +23,5 @@ jobs:
                   aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
                   aws_default_region: us-east-1
-                  checkout: false
+                  dot_env: ${{ secrets.DOT_ENV }}
                   app_port: 3333
