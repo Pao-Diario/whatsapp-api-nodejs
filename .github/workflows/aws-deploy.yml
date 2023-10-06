@@ -15,6 +15,25 @@ jobs:
             url: ${{ steps.deploy.outputs.vm_url }}
 
         steps:
+            - name: 'Create env file'
+              run: |
+                  touch .env
+                  echo CLIENT_BROWSER="${{ secrets.CLIENT_BROWSER }}" > .env
+                  echo CLIENT_PLATFORM="${{ secrets.CLIENT_PLATFORM }}" > .env
+                  echo CLIENT_VERSION="${{ secrets.CLIENT_VERSION }}" > .env
+                  echo INSTANCE_MAX_RETRY_QR="${{ secrets.INSTANCE_MAX_RETRY_QR }}" > .env
+                  echo LOG_LEVEL="${{ secrets.LOG_LEVEL }}" > .env
+                  echo MARK_MESSAGES_READ="${{ secrets.MARK_MESSAGES_READ }}" > .env
+                  echo MONGODB_ENABLED="${{ secrets.MONGODB_ENABLED }}" > .env
+                  echo MONGODB_URL="${{ secrets.MONGODB_URL }}" > .env
+                  echo PORT="${{ secrets.PORT }}" > .env
+                  echo PROTECT_ROUTES="${{ secrets.PROTECT_ROUTES }}" > .env
+                  echo TOKEN="${{ secrets.TOKEN }}" > .env
+                  echo WEBHOOK_BASE64="${{ secrets.WEBHOOK_BASE64 }}" > .env
+                  echo WEBHOOK_ENABLED="${{ secrets.WEBHOOK_ENABLED }}" > .env
+                  echo WEBHOOK_URL="${{ secrets.WEBHOOK_URL }}" > .env
+                  cat .env
+
             - id: deploy
               name: Deploy to ec2
               uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
