@@ -16,7 +16,7 @@ const LOG_LEVEL = process.env.LOG_LEVEL
 
 const INSTANCE_MAX_RETRY_QR = process.env.INSTANCE_MAX_RETRY_QR || 2
 
-const CLIENT_PLATFORM = process.env.CLIENT_PLATFORM || 'Whatsapp MD'
+const CLIENT_PLATFORM = process.env.CLIENT_PLATFORM || 'Whatsapp Pao Diario'
 const CLIENT_BROWSER = process.env.CLIENT_BROWSER || 'Chrome'
 const CLIENT_VERSION = process.env.CLIENT_VERSION || '4.0.0'
 
@@ -38,7 +38,9 @@ const WEBHOOK_BASE64 = !!(
     process.env.WEBHOOK_BASE64 && process.env.WEBHOOK_BASE64 === 'true'
 )
 // allowed events which should be sent to webhook
-const WEBHOOK_ALLOWED_EVENTS = process.env.WEBHOOK_ALLOWED_EVENTS?.split(',') || ['all']
+const WEBHOOK_ALLOWED_EVENTS = process.env.WEBHOOK_ALLOWED_EVENTS?.split(
+    ','
+) || ['all']
 // Mark messages as seen
 const MARK_MESSAGES_READ = !!(
     process.env.MARK_MESSAGES_READ && process.env.MARK_MESSAGES_READ === 'true'
@@ -74,5 +76,5 @@ module.exports = {
     webhookBase64: WEBHOOK_BASE64,
     protectRoutes: PROTECT_ROUTES,
     markMessagesRead: MARK_MESSAGES_READ,
-    webhookAllowedEvents: WEBHOOK_ALLOWED_EVENTS
+    webhookAllowedEvents: WEBHOOK_ALLOWED_EVENTS,
 }

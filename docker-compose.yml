@@ -4,6 +4,11 @@ services:
     mongodb:
         container_name: mongodb
         image: mongo:latest
+        # build:
+        #     context: .
+        #     dockerfile: Dockerfile.mongo
+        #     args:
+        #         - PORT=27017
         restart: unless-stopped
         ports:
             - 27017:27017
@@ -11,6 +16,7 @@ services:
             - db:/data/db
     app:
         container_name: api
+        image: api:latest
         build:
             context: .
             dockerfile: Dockerfile
